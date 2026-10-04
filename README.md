@@ -1,3 +1,8 @@
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://rafiqil.github.io/rafiqil_barbershop/)
+
+
+
+
 # 💈 Rafiqil Barbershop — Aplikasi Manajemen
 
 Aplikasi manajemen barbershop **full-stack (simulasi)** untuk **Rafiqil Barbershop**, dibangun dengan **Flutter (Dart)** dan **antarmuka Bahasa Indonesia**. Aplikasi berjalan tanpa backend nyata — semua data menggunakan **data dummy in-memory** yang di-seed secara otomatis saat pertama kali login, sehingga aplikasi langsung terasa "hidup".
