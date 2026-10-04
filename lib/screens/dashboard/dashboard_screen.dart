@@ -79,7 +79,7 @@ class DashboardScreen extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: cols == 1 ? 2.6 : 1.55,
+              childAspectRatio: cols == 1 ? 2.0 : (cols == 2 ? 1.5 : 1.55),
               children: [
                 StatCard(
                   label: 'Omset Hari Ini',
@@ -160,8 +160,8 @@ class _Panel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title,
-              style: const TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.w600)),
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
           if (subtitle != null) ...[
             const SizedBox(height: 2),
             Text(subtitle!,
@@ -215,12 +215,12 @@ class _RevenueChart extends StatelessWidget {
             ),
             borderData: FlBorderData(show: false),
             titlesData: FlTitlesData(
-              leftTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false)),
-              rightTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false)),
-              topTitles: const AxisTitles(
-                  sideTitles: SideTitles(showTitles: false)),
+              leftTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              rightTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              topTitles:
+                  const AxisTitles(sideTitles: SideTitles(showTitles: false)),
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
@@ -274,8 +274,9 @@ class _TopServices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final top = data.layananTerlaris;
-    final maxVal =
-        top.isEmpty ? 1 : top.map((e) => e.value).reduce((a, b) => a > b ? a : b);
+    final maxVal = top.isEmpty
+        ? 1
+        : top.map((e) => e.value).reduce((a, b) => a > b ? a : b);
     return _Panel(
       title: 'Layanan Terlaris',
       subtitle: 'Berdasarkan jumlah transaksi',
@@ -317,8 +318,8 @@ class _TopServices extends StatelessWidget {
                             value: e.value / maxVal,
                             minHeight: 7,
                             backgroundColor: AppColors.background,
-                            valueColor: const AlwaysStoppedAnimation(
-                                AppColors.accent),
+                            valueColor:
+                                const AlwaysStoppedAnimation(AppColors.accent),
                           ),
                         ),
                       ],
@@ -364,8 +365,7 @@ class _UpcomingSchedules extends StatelessWidget {
                           children: [
                             Text(Formatters.jam(s.startTime),
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 13)),
+                                    fontWeight: FontWeight.w700, fontSize: 13)),
                             Text(Formatters.hariSingkat(s.startTime),
                                 style: const TextStyle(
                                     fontSize: 10,
@@ -426,6 +426,10 @@ class _DashboardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    int cols = 4;
+    if (width < 1200) cols = 2;
+    if (width < 560) cols = 1;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -434,12 +438,12 @@ class _DashboardSkeleton extends StatelessWidget {
           const ShimmerBox(height: 90, radius: 20),
           const SizedBox(height: 24),
           GridView.count(
-            crossAxisCount: 4,
+            crossAxisCount: cols,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
-            childAspectRatio: 1.55,
+            childAspectRatio: cols == 1 ? 2.0 : (cols == 2 ? 1.5 : 1.55),
             children: List.generate(
                 4, (_) => const ShimmerBox(height: 120, radius: 18)),
           ),
