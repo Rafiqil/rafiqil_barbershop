@@ -112,3 +112,5 @@ lib/
 
 `flutter analyze` & `dart analyze` → **No errors** (hanya saran gaya `prefer_const` opsional).
 Seluruh kode berhasil dikompilasi ke kernel (front-end compiler Flutter).
+
+
